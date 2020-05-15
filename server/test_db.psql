@@ -1,0 +1,277 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 12.2
+-- Dumped by pg_dump version 12.2
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- Name: actors; Type: TABLE; Schema: public; Owner: adildostmohamed
+--
+
+CREATE TABLE public.actors (
+    id integer NOT NULL,
+    created_at timestamp without time zone DEFAULT now(),
+    updated_at timestamp without time zone DEFAULT now(),
+    name character varying(120) NOT NULL,
+    age integer NOT NULL,
+    gender character varying(120) NOT NULL
+);
+
+
+ALTER TABLE public.actors OWNER TO adildostmohamed;
+
+--
+-- Name: actors_id_seq; Type: SEQUENCE; Schema: public; Owner: adildostmohamed
+--
+
+CREATE SEQUENCE public.actors_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.actors_id_seq OWNER TO adildostmohamed;
+
+--
+-- Name: actors_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: adildostmohamed
+--
+
+ALTER SEQUENCE public.actors_id_seq OWNED BY public.actors.id;
+
+
+--
+-- Name: movie_actor_assoc; Type: TABLE; Schema: public; Owner: adildostmohamed
+--
+
+CREATE TABLE public.movie_actor_assoc (
+    id integer NOT NULL,
+    movie_id integer,
+    actor_id integer
+);
+
+
+ALTER TABLE public.movie_actor_assoc OWNER TO adildostmohamed;
+
+--
+-- Name: movie_actor_assoc_id_seq; Type: SEQUENCE; Schema: public; Owner: adildostmohamed
+--
+
+CREATE SEQUENCE public.movie_actor_assoc_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.movie_actor_assoc_id_seq OWNER TO adildostmohamed;
+
+--
+-- Name: movie_actor_assoc_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: adildostmohamed
+--
+
+ALTER SEQUENCE public.movie_actor_assoc_id_seq OWNED BY public.movie_actor_assoc.id;
+
+
+--
+-- Name: movies; Type: TABLE; Schema: public; Owner: adildostmohamed
+--
+
+CREATE TABLE public.movies (
+    id integer NOT NULL,
+    created_at timestamp without time zone DEFAULT now(),
+    updated_at timestamp without time zone DEFAULT now(),
+    title character varying(120) NOT NULL,
+    release_date date NOT NULL
+);
+
+
+ALTER TABLE public.movies OWNER TO adildostmohamed;
+
+--
+-- Name: movies_id_seq; Type: SEQUENCE; Schema: public; Owner: adildostmohamed
+--
+
+CREATE SEQUENCE public.movies_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.movies_id_seq OWNER TO adildostmohamed;
+
+--
+-- Name: movies_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: adildostmohamed
+--
+
+ALTER SEQUENCE public.movies_id_seq OWNED BY public.movies.id;
+
+
+--
+-- Name: actors id; Type: DEFAULT; Schema: public; Owner: adildostmohamed
+--
+
+ALTER TABLE ONLY public.actors ALTER COLUMN id SET DEFAULT nextval('public.actors_id_seq'::regclass);
+
+
+--
+-- Name: movie_actor_assoc id; Type: DEFAULT; Schema: public; Owner: adildostmohamed
+--
+
+ALTER TABLE ONLY public.movie_actor_assoc ALTER COLUMN id SET DEFAULT nextval('public.movie_actor_assoc_id_seq'::regclass);
+
+
+--
+-- Name: movies id; Type: DEFAULT; Schema: public; Owner: adildostmohamed
+--
+
+ALTER TABLE ONLY public.movies ALTER COLUMN id SET DEFAULT nextval('public.movies_id_seq'::regclass);
+
+
+--
+-- Data for Name: actors; Type: TABLE DATA; Schema: public; Owner: adildostmohamed
+--
+
+COPY public.actors (id, created_at, updated_at, name, age, gender) FROM stdin;
+156	2020-05-15 16:58:38.553665	2020-05-15 16:58:38.553665	Buggsy Malone	51	male
+157	2020-05-15 16:59:00.651301	2020-05-15 16:59:00.651301	Jen Stone	24	female
+158	2020-05-15 16:59:16.843331	2020-05-15 16:59:16.843331	Andrew Markham	32	male
+159	2020-05-15 16:59:32.780877	2020-05-15 16:59:32.780877	Vijay Singh	45	male
+160	2020-05-15 17:00:29.665279	2020-05-15 17:00:29.665279	Samantha Shannon	31	female
+162	2020-05-15 17:12:44.545974	2020-05-15 17:12:44.545974	Bradley Krakowski	31	male
+163	2020-05-15 17:13:18.587933	2020-05-15 17:13:18.587933	Jenny Smith	31	female
+164	2020-05-15 17:22:05.114119	2020-05-15 17:22:05.114119	Elijah Smith	31	male
+\.
+
+
+--
+-- Data for Name: movie_actor_assoc; Type: TABLE DATA; Schema: public; Owner: adildostmohamed
+--
+
+COPY public.movie_actor_assoc (id, movie_id, actor_id) FROM stdin;
+371	397	156
+372	398	156
+373	399	156
+374	400	156
+375	397	157
+376	400	157
+377	401	158
+378	397	159
+379	401	159
+380	397	160
+381	401	160
+382	397	162
+383	401	162
+384	401	163
+385	397	164
+386	398	164
+387	402	163
+388	402	156
+389	402	157
+390	402	158
+391	402	159
+\.
+
+
+--
+-- Data for Name: movies; Type: TABLE DATA; Schema: public; Owner: adildostmohamed
+--
+
+COPY public.movies (id, created_at, updated_at, title, release_date) FROM stdin;
+397	2020-05-15 16:56:07.755115	2020-05-15 16:56:07.755115	2017	2020-01-12
+398	2020-05-15 16:56:42.297748	2020-05-15 16:56:42.297748	The Smurf Movie	2015-02-24
+399	2020-05-15 16:57:03.00367	2020-05-15 16:57:03.00367	The New Kids On The Block	2012-12-22
+400	2020-05-15 17:13:36.742668	2020-05-15 17:13:36.742668	Bring down the house	1990-12-22
+401	2020-05-15 17:14:05.858981	2020-05-15 17:14:05.858981	Make it rain in Syndey	2019-09-24
+402	2020-05-15 17:23:09.981419	2020-05-15 17:23:09.981419	The thump in the middle of the night	2019-09-24
+\.
+
+
+--
+-- Name: actors_id_seq; Type: SEQUENCE SET; Schema: public; Owner: adildostmohamed
+--
+
+SELECT pg_catalog.setval('public.actors_id_seq', 164, true);
+
+
+--
+-- Name: movie_actor_assoc_id_seq; Type: SEQUENCE SET; Schema: public; Owner: adildostmohamed
+--
+
+SELECT pg_catalog.setval('public.movie_actor_assoc_id_seq', 391, true);
+
+
+--
+-- Name: movies_id_seq; Type: SEQUENCE SET; Schema: public; Owner: adildostmohamed
+--
+
+SELECT pg_catalog.setval('public.movies_id_seq', 402, true);
+
+
+--
+-- Name: actors actors_pkey; Type: CONSTRAINT; Schema: public; Owner: adildostmohamed
+--
+
+ALTER TABLE ONLY public.actors
+    ADD CONSTRAINT actors_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: movie_actor_assoc movie_actor_assoc_pkey; Type: CONSTRAINT; Schema: public; Owner: adildostmohamed
+--
+
+ALTER TABLE ONLY public.movie_actor_assoc
+    ADD CONSTRAINT movie_actor_assoc_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: movies movies_pkey; Type: CONSTRAINT; Schema: public; Owner: adildostmohamed
+--
+
+ALTER TABLE ONLY public.movies
+    ADD CONSTRAINT movies_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: movie_actor_assoc movie_actor_assoc_actor_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: adildostmohamed
+--
+
+ALTER TABLE ONLY public.movie_actor_assoc
+    ADD CONSTRAINT movie_actor_assoc_actor_id_fkey FOREIGN KEY (actor_id) REFERENCES public.actors(id) ON DELETE CASCADE;
+
+
+--
+-- Name: movie_actor_assoc movie_actor_assoc_movie_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: adildostmohamed
+--
+
+ALTER TABLE ONLY public.movie_actor_assoc
+    ADD CONSTRAINT movie_actor_assoc_movie_id_fkey FOREIGN KEY (movie_id) REFERENCES public.movies(id) ON DELETE CASCADE;
+
+
+--
+-- PostgreSQL database dump complete
+--
+
