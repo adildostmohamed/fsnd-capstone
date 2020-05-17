@@ -1,5 +1,8 @@
 .DS_Store
 frontend
 
-server/db/__pycache__
-server/.env
+db/__pycache__
+.env
+
+Pipfile
+Pipfile.lock
