@@ -5,7 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.exc import SQLAlchemyError, DataError
 from flask_cors import CORS
 from werkzeug.exceptions import NotFound
-from db.models import setup_db, Actor, Movie
+from models import setup_db, Actor, Movie
 from auth.auth import AuthError, requires_auth
 
 

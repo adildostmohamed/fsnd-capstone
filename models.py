@@ -28,10 +28,6 @@ def setup_db(app, database_path=database_path):
     db.create_all()
 
 
-def setup_migrate(app):
-    Migrate(app, db)
-
-
 movie_actor_assoc = db.Table(
     'movie_actor_assoc',
     db.Column('id', db.Integer, primary_key=True),
