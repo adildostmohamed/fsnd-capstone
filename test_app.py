@@ -15,9 +15,7 @@ class CastingTestCase(unittest.TestCase):
         """Define test variables and initialize app."""
         self.app = create_app()
         self.client = self.app.test_client
-        self.database_name = os.getenv('TEST_DB')
-        self.database_path = "postgresql://{}/{}".format(
-            'localhost:5432', self.database_name)
+        self.database_path = os.getenv('TEST_DATABASE_URL')
         setup_db(self.app, self.database_path)
         self.token_assistant = os.getenv('ASSISTANT_TOKEN')
         self.token_director = os.getenv('DIRECTOR_TOKEN')

@@ -8,10 +8,8 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # TODO: ADD ENV VARIABLES FOR LOCAL AND REMOTE DB
-
-database_name = os.getenv('DEV_DB')
 database_url = os.getenv('DATABASE_URL')
-database_path = "postgres://{}/{}".format(database_url, database_name)
+database_path = database_url
 
 db = SQLAlchemy()
 
