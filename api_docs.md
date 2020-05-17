@@ -273,3 +273,289 @@ None
   - Status code: `403`
 - Internal server error
   - Status code: `500`
+  
+## Actors
+
+### Get Actors
+
+Get actors
+
+#### Method
+
+GET
+
+#### Endpoint
+
+`/actors`
+
+#### URL Params
+
+None
+
+#### Query Params
+
+None
+
+#### Data params
+
+None
+
+#### Success response
+
+- Status code: `200`
+- Response:
+
+```
+'success': Boolean,
+'total_actors': Int,
+'actors': [
+   {
+      'name': String,
+      'age': Int,
+      'gender': String,
+      'movies': {
+         'movies': [
+            {
+               'id': Id,
+               'title': String,
+               'release_date': Date
+            },...],
+         'total_movies': Int
+      }
+   },...]
+```
+
+#### Errors
+- Not authenticated
+  - Status code: `401`
+- Insufficient permissions
+  - Status code: `403`
+- Internal server error
+  - Status code: `500`
+
+### Create Actor
+
+Create an actor
+
+#### Method
+
+POST
+
+#### Endpoint
+
+`/actors`
+
+#### URL Params
+
+None
+
+#### Query Params
+
+None
+
+#### Req Body Params
+```
+{
+   name: String,
+   gender: String,
+   age: Int,
+   movies?: [Id]
+}
+```
+
+#### Success response
+
+- Status code: `201`
+- Response:
+
+```
+'success': Boolean,
+'actor': {
+      'name': String,
+      'age': Int,
+      'gender': String,
+      'movies': {
+         'movies': [
+            {
+               'id': Id,
+               'title': String,
+               'release_date': Date
+            },...],
+         'total_movies': Int
+      }
+   }
+```
+
+#### Errors
+- Missing required data
+  - Status code: `400`
+- Invalid age format
+  - Status code: `422`
+- Not authenticated
+  - Status code: `401`
+- Insufficient permissions
+  - Status code: `403`
+- Internal server error
+  - Status code: `500`
+
+### Get Actor
+
+Get an actor by id
+
+#### Method
+
+GET
+
+#### Endpoint
+
+`/actors/:id`
+
+#### URL Params
+`actor_id`
+
+#### Query Params
+
+None
+
+#### Req Body Params
+None
+
+#### Success response
+
+- Status code: `200`
+- Response:
+
+```
+'success': Boolean,
+'actor': {
+      'name': String,
+      'age': Int,
+      'gender': String,
+      'movies': {
+         'movies': [
+            {
+               'id': Id,
+               'title': String,
+               'release_date': Date
+            },...],
+         'total_movies': Int
+      }
+   }
+```
+
+#### Errors
+- Missing required data
+  - Status code: `400`
+- Invalid age format
+  - Status code: `422`
+- Not authenticated
+  - Status code: `401`
+- Insufficient permissions
+  - Status code: `403`
+- Internal server error
+  - Status code: `500`
+
+### Update Actor
+
+Update an actor by id
+
+#### Method
+PATCH
+
+#### Endpoint
+`/actors/:id`
+
+#### URL Params
+`actor_id`
+
+#### Query Params
+None
+
+#### Req Body Params
+```
+{
+   id: Id,
+   name?: String,
+   gender?: String,
+   age?: Int,
+   movies?: [Id]
+}
+```
+
+#### Success response
+
+- Status code: `200`
+- Response:
+
+```
+'success': Boolean,
+'actor': {
+      'name': String,
+      'age': Int,
+      'gender': String,
+      'movies': {
+         'movies': [
+            {
+               'id': Id,
+               'title': String,
+               'release_date': Date
+            },...],
+         'total_movies': Int
+      }
+   }
+```
+
+#### Errors
+- Can't find actor
+  - Status code: `404`
+- Missing required data
+  - Status code: `400`
+- Invalid age format
+  - Status code: `422`
+- Not authenticated
+  - Status code: `401`
+- Insufficient permissions
+  - Status code: `403`
+- Internal server error
+  - Status code: `500`
+  
+### Delete Actor
+
+Delete an actor by id
+
+#### Method
+DELETE
+
+#### Endpoint
+`/actors/:id`
+
+#### URL Params
+`actor_id`
+
+#### Query Params
+None
+
+#### Req Body Params
+None
+
+#### Success response
+
+- Status code: `200`
+- Response:
+
+```
+'success': Boolean,
+'actor_id': Id
+```
+
+#### Errors
+- Can't find actor
+  - Status code: `404`
+- Invalid age format
+  - Status code: `422`
+- Not authenticated
+  - Status code: `401`
+- Insufficient permissions
+  - Status code: `403`
+- Internal server error
+  - Status code: `500`
