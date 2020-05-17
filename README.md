@@ -33,8 +33,8 @@ psql casting_dev < test_db.psql
 ### Auth0 Setup
 - Create an AUTH 0 tenant with a new API configured for RBAC and to return permissions in the JWT
 - Add the required properties to the `.env` file:
--- AUTH0_URL
--- AUTH0_API_AUDIENCE
+  - AUTH0_URL
+  - AUTH0_API_AUDIENCE
 #### Roles & Permissions
 ##### Assistant:
 - `read:actors`
@@ -60,9 +60,9 @@ psql casting_dev < test_db.psql
 ### Testing
 #### JWTs for testing:
 - Use your auth0 tenant to create a JWT token for each of the roles and save them in the `.env` file for:
--- ASSISTANT_TOKEN
--- DIRECTOR_TOKEN
--- PRODUCER_TOKEN
+  - ASSISTANT_TOKEN
+  - DIRECTOR_TOKEN
+  - PRODUCER_TOKEN
 #### Run tests
 - Set up a test database and add it to your `.env` file as `TEST_DB` or replace the db name directly (currently named `casting_test`)
 
