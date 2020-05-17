@@ -1,14 +1,16 @@
 import json
+import os
 from flask import request, _request_ctx_stack
 from functools import wraps
 from jose import jwt
 from urllib.request import urlopen
+from dotenv import load_dotenv
+load_dotenv()
 
 
-AUTH0_DOMAIN = 'TODO'
+AUTH0_URL = os.getenv('AUTH0_URL')
 ALGORITHMS = ['RS256']
-API_AUDIENCE = '/TODO'
-
+API_AUDIENCE = os.getenv('AUTH0_API_AUDIENCE')
 # AuthError Exception
 '''
 AuthError Exception
@@ -80,7 +82,7 @@ def check_permissions(permission, payload):
 
 
 def verify_decode_jwt(token):
-    jsonurl = urlopen(f'https://{AUTH0_DOMAIN}/.well-known/jwks.json')
+    jsonurl = urlopen(f'https://{AUTH0_URL}/.well-known/jwks.json')
     jwks = json.loads(jsonurl.read())
     unverified_header = jwt.get_unverified_header(token)
     rsa_key = {}
@@ -106,7 +108,7 @@ def verify_decode_jwt(token):
                 rsa_key,
                 algorithms=ALGORITHMS,
                 audience=API_AUDIENCE,
-                issuer='https://' + AUTH0_DOMAIN + '/'
+                issuer='https://' + AUTH0_URL + '/'
             )
 
             return payload

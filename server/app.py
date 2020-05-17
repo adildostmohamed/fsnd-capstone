@@ -37,7 +37,8 @@ def create_app(test_config=None):
         where movies is the list of movies and total_movies is the count of all movies
     '''
     @app.route('/movies', methods=['GET'])
-    def get_movies():
+    @requires_auth('read:movies')
+    def get_movies(token):
         try:
             movies = Movie.query.order_by(Movie.id).all()
             formatted_movies = list(map(lambda x: x.format(), movies))
@@ -66,7 +67,8 @@ def create_app(test_config=None):
         where movies is an object with the new movie
     '''
     @app.route('/movies', methods=['POST'])
-    def create_movie():
+    @requires_auth('create:movies')
+    def create_movie(token):
         movie_data = request.get_json()
         if movie_data is None:
             abort(400, 'Bad request - movie_data is required')
@@ -112,7 +114,8 @@ def create_app(test_config=None):
         {"success": True, "movie": movie}
     '''
     @app.route('/movies/<int:movie_id>', methods=['GET'])
-    def get_movie(movie_id):
+    @requires_auth('read:movies')
+    def get_movie(token, movie_id):
         movie = get_movie_by_id(movie_id)
         try:
             formatted_movie = movie.format()
@@ -140,7 +143,8 @@ def create_app(test_config=None):
         where movies is an object with the updated movie
     '''
     @app.route('/movies/<int:movie_id>', methods=['PATCH'])
-    def update_movie(movie_id):
+    @requires_auth('update:movies')
+    def update_movie(token, movie_id):
         movie_data = request.get_json()
         if movie_data is None:
             abort(400, 'Bad request - movie_data is required')
@@ -186,7 +190,8 @@ def create_app(test_config=None):
         {"success": True, "movie_id": id}
     '''
     @app.route('/movies/<int:movie_id>', methods=['DELETE'])
-    def delete_movie(movie_id):
+    @requires_auth('delete:movies')
+    def delete_movie(token, movie_id):
         movie = get_movie_by_id(movie_id)
         try:
             movie.delete()
@@ -224,7 +229,8 @@ def create_app(test_config=None):
         where movies is the list of movies and total_movies is the count of all movies
     '''
     @app.route('/actors', methods=['GET'])
-    def get_actors():
+    @requires_auth('read:actors')
+    def get_actors(token):
         try:
             actors = Actor.query.order_by(Actor.id).all()
             formatted_actors = list(map(lambda x: x.format(), actors))
@@ -253,7 +259,8 @@ def create_app(test_config=None):
         where actor is an object with the new actor
     '''
     @app.route('/actors', methods=['POST'])
-    def create_actor():
+    @requires_auth('create:actors')
+    def create_actor(token):
         actor_data = request.get_json()
         if actor_data is None:
             abort(400, 'Bad request - actor_data is required')
@@ -305,7 +312,8 @@ def create_app(test_config=None):
         {"success": True, "actor": actor}
     '''
     @app.route('/actors/<int:actor_id>', methods=['GET'])
-    def get_actor(actor_id):
+    @requires_auth('read:actors')
+    def get_actor(token, actor_id):
         actor = get_actor_by_id(actor_id)
         try:
             formatted_actor = actor.format()
@@ -333,7 +341,8 @@ def create_app(test_config=None):
     '''
 
     @app.route('/actors/<int:actor_id>', methods=['PATCH'])
-    def update_actor(actor_id):
+    @requires_auth('update:actors')
+    def update_actor(token, actor_id):
         actor_data = request.get_json()
         if actor_data is None:
             abort(400, 'Bad request - actor_data is required')
@@ -382,7 +391,8 @@ def create_app(test_config=None):
         {"success": True, "actor_id": actor_id}
     '''
     @app.route('/actors/<int:actor_id>', methods=['DELETE'])
-    def delete_actor(actor_id):
+    @requires_auth('delete:actors')
+    def delete_actor(token, actor_id):
         actor = get_actor_by_id(actor_id)
         try:
             actor.delete()
@@ -427,11 +437,10 @@ def create_app(test_config=None):
 
     @app.errorhandler(500)
     def internal_server(error):
-        message = error.description if error.description else 'internal server error'
         return jsonify({
             "success": False,
             "error": 500,
-            "message": message
+            "message": 'internal server error'
         }), 500
 
     @app.errorhandler(404)
