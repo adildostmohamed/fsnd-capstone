@@ -10,7 +10,8 @@ load_dotenv()
 # TODO: ADD ENV VARIABLES FOR LOCAL AND REMOTE DB
 
 database_name = os.getenv('DEV_DB')
-database_path = "postgres://{}/{}".format('localhost:5432', database_name)
+database_url = os.getenv('DATABASE_URL')
+database_path = "postgres://{}/{}".format(database_url, database_name)
 
 db = SQLAlchemy()
 
