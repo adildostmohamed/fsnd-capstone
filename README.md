@@ -34,11 +34,11 @@ psql casting_dev < test_db.psql
 - run `python3 app.py` which will start the backend with debug mode on on port `localhost:8080`
 #### Testing
 ##### Run tests
-- To run the tests, run
+- Set up a test database and add it to your `.env` file as `TEST_DB` or replace the db name directly (currently named `casting_test`)
 
 ```
-dropdb trivia_test
-createdb trivia_test
-psql trivia_test < trivia.psql
-python test_flaskr.py
+dropdb casting_test
+createdb casting_test
+psql casting_test < test_db.psql
+python test_app.py
 ```
