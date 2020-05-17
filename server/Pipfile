@@ -31,6 +31,7 @@ Flask-Cors = "==3.0.8"
 flask-migrate = "*"
 psycopg2 = "*"
 python-dotenv = "*"
+gunicorn = "*"
 
 [requires]
 python_version = "3.7"
