@@ -5,7 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.exc import SQLAlchemyError, DataError
 from flask_cors import CORS
 from werkzeug.exceptions import NotFound
-from db.models import setup_db, setup_migrate, Actor, Movie
+from db.models import setup_db, Actor, Movie
 from auth.auth import AuthError, requires_auth
 
 
@@ -14,7 +14,6 @@ def create_app(test_config=None):
     app = Flask(__name__)
     CORS(app)
     setup_db(app)
-    setup_migrate(app)
 
     @app.route('/')
     def index():

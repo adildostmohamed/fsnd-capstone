@@ -1,4 +1,4 @@
-from db.models import setup_db, Movie, Actor
+from models import setup_db, Movie, Actor
 from app import create_app
 from flask_sqlalchemy import SQLAlchemy
 import json
