@@ -1,5 +1,8 @@
 # fsnd-capstone
 
+## API Docs
+See `api_docs.md`
+
 ## Getting Started
 
 ### Installing Dependencies
