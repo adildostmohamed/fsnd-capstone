@@ -58,6 +58,65 @@ None
 - Internal server error
   - Status code: `500`
 
-#### Sample Call
+
+### Get Movies
+
+Create a new movie
+
+#### Method
+
+POST
+
+#### Endpoint
 
 `/movies`
+
+#### URL Params
+
+None
+
+#### Query Params
+
+None
+
+#### Req Body Params
+
+```
+{
+   title: String,
+   release_date: Date,
+   actors?: [Id]
+}
+```
+
+#### Success response
+
+- Status code: `201`
+- Response:
+
+```
+'success': Boolean,
+'movie': {
+   id: Id,
+   title: String,
+   release_date: Date,
+   actors: {
+     total_actors: Int,
+     actors: [
+       {
+         id: Id,
+         name: String,
+         gender: String
+       }, ...]
+   }
+ }
+```
+
+#### Errors
+
+- Insufficient permissions
+  - Status code: `403`
+- Not authenticated
+  - Status code: `401`
+- Internal server error
+  - Status code: `500`
