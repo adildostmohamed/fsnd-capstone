@@ -1,13 +1,11 @@
 
 import json
-from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Column, String, Integer, create_engine
 import os
 from dotenv import load_dotenv
 load_dotenv()
 
-# TODO: ADD ENV VARIABLES FOR LOCAL AND REMOTE DB
 database_url = os.getenv('DATABASE_URL')
 database_path = database_url
 
@@ -38,7 +36,6 @@ movie_actor_assoc = db.Table(
 
 '''
 Movie
-TODO: ADD RELEATIONSHIP BETWEEN MOVIE AND ACTOR
 '''
 
 
