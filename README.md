@@ -25,9 +25,20 @@ This will install all of the required packages we selected within the `requireme
 #### Start Local Development
 ##### Database Setup
 - Set up a dev database and add it to your `.env` file as `DEV_DB` or replace the db name directly (currently named `casting_dev`)
-With Postgres running, restore a database using the trivia.psql file provided. From the backend folder in terminal run:
+- With Postgres running, restore a database using the trivia.psql file provided. From the backend folder in terminal run:
 
 ```bash
 psql casting_dev < test_db.psql
 ```
+##### Run backend
 - run `python3 app.py` which will start the backend with debug mode on on port `localhost:8080`
+#### Testing
+##### Run tests
+- To run the tests, run
+
+```
+dropdb trivia_test
+createdb trivia_test
+psql trivia_test < trivia.psql
+python test_flaskr.py
+```
